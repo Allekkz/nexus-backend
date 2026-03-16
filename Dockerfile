@@ -1,11 +1,17 @@
-# Usando imagem base do OpenJDK
-FROM openjdk:17-jdk-alpine
+FROM ubuntu:latest AS build
 
-# Definindo diretório de trabalho dentro do container
-WORKDIR /app
+RUN apt-get update
+RUN apt-get install openjdk-17-jdk maven -y
 
-# Copiando o .jar gerado para dentro do container
-COPY target/nexus-0.0.1-SNAPSHOT app.jar
+COPY . .
 
-# Comando para rodar a aplicação
-ENTRYPOINT ["java","-jar","app.jar"]
+RUN mvn clean install 
+
+# Segunda fase: runtime
+FROM eclipse-temurin:17-jdk
+
+EXPOSE 8080
+
+COPY --from=build /target/nexus-0.0.1-SNAPSHOT.jar app.jar
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
