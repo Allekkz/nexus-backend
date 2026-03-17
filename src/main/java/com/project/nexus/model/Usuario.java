@@ -42,6 +42,8 @@ public class Usuario {
     @NotBlank
     private String curso;
 
+    private String bio;
+
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Postagem> postagens = new ArrayList<>();
 
