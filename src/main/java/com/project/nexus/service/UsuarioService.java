@@ -32,7 +32,7 @@ public class UsuarioService {
         return usuarioRepository.findById(id);
     }
 
-    /* Update // Campos permitidos: Nome && Foto */
+    /* Update // Campos permitidos: Nome && Foto && Bio */
     public Usuario atualizar(Long id, Usuario dadosAtualizados) {
 
         Usuario usuario = usuarioRepository.findById(id)
@@ -40,6 +40,7 @@ public class UsuarioService {
 
         usuario.setNome(dadosAtualizados.getNome());
         usuario.setImgUrl(dadosAtualizados.getImgUrl());
+        usuario.setBio(dadosAtualizados.getBio());
 
         return usuarioRepository.save(usuario);
     }
