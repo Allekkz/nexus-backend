@@ -23,5 +23,6 @@ public class PostagemDTO {
         this.conteudo = postagem.getConteudo();
         this.nomeUsuario = postagem.getUsuario().getNome();
         this.fotoUsuario = postagem.getUsuario().getImgUrl();
+        
     }
 }
