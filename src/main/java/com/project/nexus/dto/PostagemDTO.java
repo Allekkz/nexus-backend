@@ -1,5 +1,7 @@
 package com.project.nexus.dto;
 
+import java.time.LocalDateTime;
+
 import com.project.nexus.model.Postagem;
 
 import lombok.Getter;
