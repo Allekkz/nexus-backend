@@ -15,6 +15,7 @@ public class PostagemDTO {
     private String conteudo;
     private String nomeUsuario;
     private String fotoUsuario;
+    private long totalCurtidas;
 
     public PostagemDTO(Postagem postagem) {
         this.id = postagem.getId();
