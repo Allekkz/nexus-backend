@@ -13,6 +13,7 @@ public class PostagemDTO {
     private Long id;
     private String titulo;
     private String conteudo;
+    private String imgUrl;
 
     private String nomeUsuario;
     private String fotoUsuario;
@@ -24,6 +25,7 @@ public class PostagemDTO {
         this.id = postagem.getId();
         this.titulo = postagem.getTitulo();
         this.conteudo = postagem.getConteudo();
+        this.imgUrl = postagem.getImgUrl();
         this.nomeUsuario = postagem.getUsuario().getNome();
         this.fotoUsuario = postagem.getUsuario().getImgUrl();
         this.idDoUsuario = postagem.getUsuario().getId();
