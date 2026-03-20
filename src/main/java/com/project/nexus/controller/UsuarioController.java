@@ -1,7 +1,6 @@
 package com.project.nexus.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.nexus.dto.UsuarioDTO;
 import com.project.nexus.model.Usuario;
 import com.project.nexus.service.ComentarioService;
 import com.project.nexus.service.CurtidaService;
@@ -43,17 +43,21 @@ public class UsuarioController {
 
     /* Rota para listar usuários: */
     @GetMapping
-    public List<Usuario> listar() {
-        return usuarioService.listar();
+    public List<UsuarioDTO> listar() {
+        return usuarioService.listarComPostagens();
     }
 
     /* Rota para buscar por ID: */
-    @GetMapping("/{id}")
+/*     @GetMapping("/{id}")
     public Optional<Usuario> buscar(@PathVariable Long id) {
         return usuarioService.buscarPorId(id);
+    } */
+    @GetMapping("/{id}")
+    public UsuarioDTO buscar(@PathVariable Long id) {
+        return usuarioService.buscarComPostagens(id);
     }
 
-    /* Rota para atualizar Usuário || Nome && Foto */
+    /* Rota para atualizar Usuário || Nome && Foto && Bio */
     @PutMapping("/{id}")
     public Usuario atualizar(@PathVariable Long id, @RequestBody Usuario usuario) {
         return usuarioService.atualizar(id, usuario);
@@ -67,7 +71,7 @@ public class UsuarioController {
 
     /* Rota para logar: */
     @PostMapping("/login")
-    public Usuario login(@RequestBody Usuario usuario) {
+    public UsuarioDTO login(@RequestBody Usuario usuario) {
         return usuarioService.login(usuario.getEmail(), usuario.getSenha());
     }
 
