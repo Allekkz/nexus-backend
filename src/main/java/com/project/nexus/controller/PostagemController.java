@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.nexus.dto.PostagemDTO;
 import com.project.nexus.model.Postagem;
 import com.project.nexus.service.PostagemService;
 
@@ -33,20 +34,37 @@ public class PostagemController {
     }
 
     /* Rota para listar - FEED: */
+    /*
+     * @GetMapping
+     * public List<Postagem> listar() {
+     * return postagemService.listar();
+     * }
+     */
+    /* Depois do DTO: */
     @GetMapping
-    public List<Postagem> listar() {
+    public List<PostagemDTO> listar() {
         return postagemService.listar();
     }
 
     /* Buscar postagem por ID: */
-    @GetMapping("/{id}")
+/*     @GetMapping("/{id}")
     public Optional<Postagem> buscar(@PathVariable Long id) {
+        return postagemService.buscarPorId(id);
+    } */
+   /* usando DTO: */
+    @GetMapping("/{id}")
+    public Optional<PostagemDTO> buscar(@PathVariable Long id) {
         return postagemService.buscarPorId(id);
     }
 
     /* Listar postagens de um usuário: */
-    @GetMapping("/usuario/{usuarioId}")
+/*     @GetMapping("/usuario/{usuarioId}")
     public List<Postagem> listarPorUsuario(@PathVariable Long usuarioId) {
+        return postagemService.listarPorUsuario(usuarioId);
+    } */
+   /* usando DTO: */
+    @GetMapping("/usuario/{usuarioId}")
+    public List<PostagemDTO> listarPorUsuario(@PathVariable Long usuarioId) {
         return postagemService.listarPorUsuario(usuarioId);
     }
 
