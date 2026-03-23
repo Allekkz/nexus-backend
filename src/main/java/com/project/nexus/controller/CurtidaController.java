@@ -41,9 +41,12 @@ public class CurtidaController {
     /* Contar curtidas da postagem: */
     @GetMapping("/postagem/{postagemId}/count")
     public long contarCurtidas(@PathVariable Long postagemId) {
-        Postagem postagem = postagemService.buscarEntidadePorId(postagemId);
-
-        return curtidaService.contarCurtidas(postagem);
+        try {
+            Postagem postagem = postagemService.buscarEntidadePorId(postagemId);
+            return curtidaService.contarCurtidas(postagem);
+        } catch (Exception e) {
+            return 0; // evita 500
+        }
     }
 
     /* Verificar se o user já curtiu: */
