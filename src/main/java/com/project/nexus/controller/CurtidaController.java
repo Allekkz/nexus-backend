@@ -30,8 +30,8 @@ public class CurtidaController {
     /* Curtir ou descurtir postagem: */
     @PostMapping
     public boolean curtirOuDescurtir(@RequestParam Long usuarioId, @RequestParam Long postagemId) {
-        Usuario usuario = usuarioService.buscarPorId(usuarioId) 
-            .orElseThrow(() -> new RuntimeException("Usuário não encontrado!"));
+        Usuario usuario = usuarioService.buscarPorId(usuarioId)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado!"));
 
         Postagem postagem = postagemService.buscarEntidadePorId(postagemId);
 
@@ -43,7 +43,21 @@ public class CurtidaController {
     public long contarCurtidas(@PathVariable Long postagemId) {
         Postagem postagem = postagemService.buscarEntidadePorId(postagemId);
 
-            return curtidaService.contarCurtidas(postagem);
+        return curtidaService.contarCurtidas(postagem);
+    }
+
+    /* Verificar se o user já curtiu: */
+    @GetMapping("/postagem/{postagemId}/usuario/{usuarioId}")
+    public boolean usuarioCurtiu(
+            @PathVariable Long postagemId,
+            @PathVariable Long usuarioId) {
+
+        Usuario usuario = usuarioService.buscarPorId(usuarioId)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado!"));
+
+        Postagem postagem = postagemService.buscarEntidadePorId(postagemId);
+
+        return curtidaService.usuarioCurtiu(usuario, postagem);
     }
 
 }
