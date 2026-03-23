@@ -55,12 +55,20 @@ public class CurtidaController {
             @PathVariable Long postagemId,
             @PathVariable Long usuarioId) {
 
-        Usuario usuario = usuarioService.buscarPorId(usuarioId)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado!"));
+        try {
+            Usuario usuario = usuarioService.buscarPorId(usuarioId)
+                    .orElse(null);
 
-        Postagem postagem = postagemService.buscarEntidadePorId(postagemId);
+            Postagem postagem = postagemService.buscarEntidadePorId(postagemId);
 
-        return curtidaService.usuarioCurtiu(usuario, postagem);
+            if (usuario == null)
+                return false;
+
+            return curtidaService.usuarioCurtiu(usuario, postagem);
+
+        } catch (Exception e) {
+            return false; // evita 500
+        }
     }
 
 }
