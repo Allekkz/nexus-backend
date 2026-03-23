@@ -48,4 +48,8 @@ public class CurtidaService {
         return curtidaRepository.countByPostagemUsuario(usuario);
     }
 
+    /* Verifica se já curtiu: */
+    public boolean usuarioCurtiu(Usuario usuario, Postagem postagem) {
+        return curtidaRepository.existsByUsuarioAndPostagem(usuario, postagem);
+    }
 }
